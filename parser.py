@@ -38,7 +38,8 @@ def get_nutrition_values(url):
         span_value = li.find_element(By.CSS_SELECTOR, 'span.value')
         span_sr_only_pd = span_value.find_element(By.CSS_SELECTOR, 'span.sr-only.sr-only-pd')
         nutrition_value = span_sr_only_pd.text.strip()
-        nutrition_values.append(nutrition_value)
+        cleaned_value = re.sub(r'\s+', ' ', nutrition_value)
+        nutrition_values.append(cleaned_value)
 
     driver.quit()
     return nutrition_values
